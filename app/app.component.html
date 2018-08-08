@@ -1,0 +1,32 @@
+<div class="container justify-content-center col-md-4 col-md-offset-4">
+  <div class="row centralign">
+    <h3>{{title}}</h3>
+    <hr/>
+  </div>
+
+  <form #form="ngForm" (submit)="postForm(form)" novalidate>
+    <div class="form-group">
+      <label for="FullName">Full Name</label>
+      <input #FullName="ngModel"  type="text" class="form-control" id="FullName" placeholder="FullName">
+    </div>
+    <div class="form-group">
+      <label for="Email">Email</label>
+      <input #Email="ngModel" type="email" class="form-control" id="Email" placeholder="Email">
+      <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+      <label for="pword">Password</label>
+      <input type="password" class="form-control" id="pword" placeholder="Password">
+    </div>
+    <div class="form-group">
+      <label for="rpword">Retype Password</label>
+      <input type="password" class="form-control" id="rpword" placeholder="ReType Password">
+    </div>
+    <div class="form-group">
+      <input type="checkbox"><span>I Agree to the Terms and Conditions!</span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+</div>
+
