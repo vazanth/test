@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import {FormsModule, NgForm} from '@angular/forms';
-import {BrowserModule} from '@angular/platform-browser';
+import {Component} from '@angular/core';
+import { NgForm} from '@angular/forms';
+import {EmpModel} from './model/emp.model';
+import {AppSignupService} from './services/app-signup.service';
+
 
 @Component({
   selector: 'app-root',
@@ -9,13 +11,18 @@ import {BrowserModule} from '@angular/platform-browser';
 })
 export class AppComponent {
   title = 'Welcome to Signup Page';
+  model = new EmpModel('', false);
 
-  postForm(form: NgForm ) {
-    alert('clicked');
-    console.log(form.value);
-    if (form.value === '') {
-      alert('Values are empty');
-    }
+  constructor(private _AppSignupService: AppSignupService) {
+
   }
 
+  postForm(form: NgForm) {
+    // alert('clicked');
+    console.log(form.value);
+    this._AppSignupService.getAppSignupService(form.value).subscribe(
+          success => console.log('success:', success),
+          error => console.log('error:', error)
+    )
+  }
 }

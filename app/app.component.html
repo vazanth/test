@@ -3,30 +3,49 @@
     <h3>{{title}}</h3>
     <hr/>
   </div>
-
-  <form #form="ngForm" (submit)="postForm(form)" novalidate>
+  <form #form="ngForm" (ngSubmit)="postForm(form)">
     <div class="form-group">
       <label for="FullName">Full Name</label>
-      <input #FullName="ngModel"  type="text" class="form-control" id="FullName" placeholder="FullName">
+      <input #FullName="ngModel" type="text" class="form-control"
+             [class.is-invalid]="FullName.touched && FullName.invalid"
+             id="FullName" placeholder="FullName" ngModel name="FullName" required>
+      <div class="invalid-feedback">Name Can't be Empty</div>
     </div>
     <div class="form-group">
       <label for="Email">Email</label>
-      <input #Email="ngModel" type="email" class="form-control" id="Email" placeholder="Email">
+      <input #Email="ngModel" type="email" class="form-control" [class.is-invalid]="Email.touched && Email.invalid"
+             id="Email" placeholder="Email" ngModel name="Email" required>
       <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+      <div class="invalid-feedback">Email Can't be Empty</div>
     </div>
     <div class="form-group">
       <label for="pword">Password</label>
-      <input type="password" class="form-control" id="pword" placeholder="Password">
+      <input #Password="ngModel" type="password" class="form-control"
+             [class.is-invalid]="Password.touched && Password.invalid"
+             id="pword" placeholder="Password" ngModel name="pword" required>
+      <div class="invalid-feedback">Password Field Can't be Empty</div>
     </div>
     <div class="form-group">
       <label for="rpword">Retype Password</label>
-      <input type="password" class="form-control" id="rpword" placeholder="ReType Password">
+      <input #RPassword="ngModel" type="password" class="form-control"
+             [class.is-invalid]="RPassword.touched && RPassword.invalid"
+             id="rpword" placeholder="ReType Password" ngModel name="rpword" required>
+      <div class="invalid-feedback">Password Field Can't be Empty</div>
     </div>
     <div class="form-group">
-      <input type="checkbox"><span>I Agree to the Terms and Conditions!</span>
+      <div class="form-check">
+        <input #checkbox="ngModel" type="checkbox" name="check" ngModel required [ngModel]='model.check'
+               class="form-check-input" [class.is-invalid]="checkbox.touched && checkbox.invalid">
+        <div class="form-check-label">I Agree to the Terms and Conditions!</div>
+      </div>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
+    <br>
+    <!-- Fullname :  {{FullName.value}}<br>
+     form :  {{ form.value | json }}<br>
+     Angular: {{ model | json}}<br>
+      {{ form.valid }}
+    -->
   </form>
-
 </div>
 
