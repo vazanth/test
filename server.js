@@ -9,11 +9,15 @@ var requestListener=function (req,res) {
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     console.log('req:',req.method);
     if(req.method.toLowerCase()=='post'){
-        console.log('inside post')
+        console.log('inside post');
         processForm(req,res);
         return;
-    }else{
-        res.end("No Data");
+    }
+
+    if(req.method.toLowerCase()==='get'){
+        console.log('inside get');
+        getForm(req, res);
+        return;
     }
     res.end();
 }
@@ -30,6 +34,18 @@ function processForm(req,res) {
             {data: data}
         ));
     });
+}
+
+function getForm(req, res) {
+    console.log('Inside GF');
+    var data = {
+        data:{
+           country: ['India', 'United States', 'Canada', 'United Kingdom']
+        }
+    }
+
+    res.end(JSON.stringify(data));
+    console.log(JSON.stringify(data));
 }
 
 var server=http.createServer(requestListener);
